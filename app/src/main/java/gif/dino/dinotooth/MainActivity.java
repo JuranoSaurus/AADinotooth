@@ -1,22 +1,16 @@
 package gif.dino.dinotooth;
 
-import android.app.Activity;
-
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.Gravity;
+import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.support.v4.widget.DrawerLayout;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
 
 public class MainActivity extends Activity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -31,6 +25,9 @@ public class MainActivity extends Activity
      */
     private CharSequence mTitle;
 
+    //back press
+    private BackPressCloseHandler backPressCloseHandler;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +41,8 @@ public class MainActivity extends Activity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+
+        backPressCloseHandler = new BackPressCloseHandler(this);
     }
 
     @Override
@@ -52,6 +51,7 @@ public class MainActivity extends Activity
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
+                .addToBackStack("flagBack")
                 .commit();
     }
 
@@ -142,5 +142,17 @@ public class MainActivity extends Activity
                     getArguments().getInt(ARG_SECTION_NUMBER));
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        // BackStack의 수를 가져온다
+        //getFragmentManager().getBackStackEntryCount()
+
+        //전단계의 Fragment
+        getFragmentManager().popBackStack();
+        backPressCloseHandler.onBackPressed();
+    }
+
 
 }
