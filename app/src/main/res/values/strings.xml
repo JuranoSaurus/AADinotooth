@@ -2,11 +2,12 @@
     <string name="app_name">치카치카푸푸</string>
 
     <string name="action_settings">환경설정</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main">치카치카푸푸</string>
 
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
+    <string name="title_section1">양치현황</string>
+    <string name="title_section2">양치교육</string>
+    <string name="title_section3">마일리지</string>
+    <string name="title_section4">환경설정</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
