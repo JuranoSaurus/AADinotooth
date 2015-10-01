@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="back_gray">#F2F2F2</color>
+    <color name="main_mint">#78d4e3</color>
+    <color name="point_red">#f68686</color>
+    <color name="bar_gray">#d5d5d5</color>
+</resources>
