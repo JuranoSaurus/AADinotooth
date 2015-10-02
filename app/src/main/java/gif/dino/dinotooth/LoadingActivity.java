@@ -19,7 +19,7 @@ import java.io.DataOutputStream;
 @EActivity(R.layout.activity_loading)
 public class LoadingActivity extends Activity {
 
-    ToothSocket socket = null;
+    static ToothSocket socket = null;
     DataOutputStream dos;
 
     @Override
@@ -29,19 +29,23 @@ public class LoadingActivity extends Activity {
         Handler mHandler = new Handler(Looper.getMainLooper()) {
             @Override
             public void handleMessage(Message inputMessage) {
+                String msg;
                 switch(inputMessage.what){
                     case ToothSocket.MessageTypeClass.SIMSOCK_DATA :
-                        String msg = (String) inputMessage.obj;
+                        msg = (String) inputMessage.obj;
                         Log.d("JOOL", msg);
                         Log.d("JOOL", "SIMSOCK_DATA ~~~~~~~~~! 심!솎!");
-                        Toast.makeText(getApplicationContext(), "SIMSOCK_DATA", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "SIMSOCK_DATA "+msg, Toast.LENGTH_LONG).show();
                         // do something with UI
+
+
                         break;
 
                     case ToothSocket.MessageTypeClass.SIMSOCK_CONNECTED :
                         // do something with UI
+                        msg = (String) inputMessage.obj;
                         Log.d("JOOL", "SIMSOCK_연결잼~~~~~~~~~! 심!솎!");
-                        Toast.makeText(getApplicationContext(), "SIMSOCK_CONNECTED", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "SIMSOCK_CONNECTED "+msg, Toast.LENGTH_LONG).show();
                         break;
 
                     case ToothSocket.MessageTypeClass.SIMSOCK_DISCONNECTED :
@@ -57,6 +61,7 @@ public class LoadingActivity extends Activity {
         try {
             socket = new ToothSocket(DataConstants.IP_ADDRESS, DataConstants.PORT_NUM, mHandler);
             socket.start();
+
         }catch (Exception e){
             Log.e("JOOL", "socket error");
         }
@@ -69,6 +74,9 @@ public class LoadingActivity extends Activity {
     @Background(delay = 1500)
     void doInBackgroundAfterTwoSeconds() {
         if(socket != null) {
+            try {
+                socket.sendString("2015-10-03");
+            }catch (Exception e){}
             Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
             mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

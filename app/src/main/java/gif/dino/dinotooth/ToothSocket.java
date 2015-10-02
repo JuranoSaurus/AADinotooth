@@ -6,10 +6,11 @@ import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
@@ -28,6 +29,11 @@ public class ToothSocket extends Thread{
     private int     mPort = 8080;
     private boolean mConnected = false;
     private Handler mHandler = null;
+
+    DataOutputStream dos;
+    DataInputStream dis ;
+    byte[] in;
+    byte[] out;
 
     static class MessageTypeClass {
         public static final int SIMSOCK_CONNECTED = 1;
@@ -71,8 +77,13 @@ public class ToothSocket extends Thread{
         if(mSocket == null)         return;
 
         try {
+            in = new byte[1024];
+            out = new byte[1024];
+            dos = new DataOutputStream(mSocket.getOutputStream());
+            dis= new DataInputStream(mSocket.getInputStream());
             buffRecv = new BufferedReader(new InputStreamReader(mSocket.getInputStream()));
             buffSend = new BufferedWriter(new OutputStreamWriter(mSocket.getOutputStream()));
+
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -85,8 +96,11 @@ public class ToothSocket extends Thread{
         String aLine = null;
 
         while( ! Thread.interrupted() ){ try {
+            dis.read(in, 0, in.length);
+            String receive = new String(in, 0, in.length);
             aLine = buffRecv.readLine();
-            if(aLine != null) makeMessage(MessageType.SIMSOCK_DATA, aLine);
+            if(receive != null) makeMessage(MessageType.SIMSOCK_DATA, receive);
+//            if(aLine != null) makeMessage(MessageType.SIMSOCK_DATA, aLine);
             else break;
         } catch (IOException e) {
             // TODO Auto-generated catch block
@@ -99,6 +113,8 @@ public class ToothSocket extends Thread{
         try {
             buffRecv.close();
             buffSend.close();
+            dos.close();
+            dis.close();
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -111,8 +127,20 @@ public class ToothSocket extends Thread{
     }
 
     public void sendString(String str){
-        PrintWriter out = new PrintWriter(buffSend, true);
-        out.println(str);
+//        PrintWriter out = new PrintWriter(buffSend, true);
+//        out.println(str);
+//        PrintWriter out_byte = new PrintWriter(buffSend, true);
+//        out = str.getBytes();
+//        out_byte.print(out);
+        out = str.getBytes();
+
+        try{
+            dos.write(out);
+            dos.flush();
+        }catch (IOException e){}
+
+
+
     }
 
 }

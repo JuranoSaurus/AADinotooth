@@ -20,14 +20,15 @@
             android:layout_height="wrap_content"
             android:text="날짜 선택"
             android:id="@+id/txtDate"
-            android:layout_margin="5dp"
-            android:textSize="20sp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="5dp"
+            android:textSize="15sp"
             android:layout_centerHorizontal="true" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="2015년 10월 2일"
+            android:text="2015년 10월 3일"
             android:id="@+id/btnDate"
             android:layout_below="@+id/txtDate"
             android:layout_margin="5dp"
@@ -43,7 +44,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:background="#ffffff"
-        android:layout_margin="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:padding="15dp">
 
 
@@ -326,8 +328,8 @@
             android:src="@mipmap/ic_line" />
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="2000dp"
+            android:layout_height="match_parent"
             android:layout_marginTop="3dp"
             android:layout_centerHorizontal="true"
             android:id="@+id/img_total"
