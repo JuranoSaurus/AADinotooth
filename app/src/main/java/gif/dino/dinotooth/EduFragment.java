@@ -1,12 +1,16 @@
 package gif.dino.dinotooth;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
 
 
 /**
@@ -26,6 +30,11 @@ public class EduFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    //list view
+    View addMessage;
+    private ListView m_ListView;
+    private ArrayAdapter<String> m_Adapter;
 
     private OnFragmentInteractionListener mListener;
 
@@ -64,8 +73,32 @@ public class EduFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_edu, container, false);
+
+        addMessage = inflater.inflate(R.layout.fragment_edu, container, false);
+        // Android에서 제공하는 string 문자열 하나를 출력 가능한 layout으로 어댑터 생성
+        m_Adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1);
+
+        // Xml에서 추가한 ListView 연결
+        m_ListView = (ListView) addMessage.findViewById(R.id.listview_edu);
+
+        // ListView에 어댑터 연결
+        m_ListView.setAdapter(m_Adapter);
+
+        // ListView 아이템 터치 시 이벤트 추가
+        m_ListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getActivity().getApplicationContext(), m_Adapter.getItem(position), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // ListView에 아이템 추가
+        m_Adapter.add("이를 닦아요");
+        m_Adapter.add("뽀로로 어린이 양치 캠페인");
+
+        return addMessage;
     }
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {

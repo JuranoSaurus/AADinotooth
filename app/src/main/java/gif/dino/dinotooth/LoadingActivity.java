@@ -1,9 +1,9 @@
 package gif.dino.dinotooth;
 
-import android.app.ActionBar;
 import android.app.Activity;
-import android.os.Bundle;
 import android.content.Intent;
+import android.os.Bundle;
+
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Fullscreen;
@@ -15,10 +15,6 @@ public class LoadingActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // hide actionbar
-        ActionBar actionBar = getActionBar();
-        actionBar.hide();
 
         // 1.5초후 시작
         doInBackgroundAfterTwoSeconds();
