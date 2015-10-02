@@ -249,6 +249,65 @@
         android:layout_margin="10dp"
         android:padding="15dp">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="평균 양치 시간"
+            android:id="@+id/txt_avg_time_title"
+            android:textSize="15sp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:layout_marginTop="3dp"
+            android:id="@+id/img_gray_line_2"
+            android:layout_below="@+id/txt_avg_time_title"
+            android:src="@mipmap/ic_line" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/layout_avg_time_total"
+            android:layout_below="@+id/img_gray_line_2"
+            android:paddingRight="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:text="3분"
+                android:id="@+id/txt_avg_time"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="10dp"/>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:weightSum="200"
+                android:id="@+id/layout_avg_time"
+                android:layout_marginTop="15dp"
+                android:layout_toLeftOf="@+id/txt_avg_time">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="100"
+                    android:id="@+id/layout_avg_time_left"
+                    android:background="@color/point_red"/>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/layout_avg_time_right"
+                    android:layout_weight="100"
+                    android:background="@color/bar_gray"/>
+            </LinearLayout>
+
+        </RelativeLayout>
+
 
     </RelativeLayout>
 
