@@ -1,13 +1,107 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" tools:context="gif.dino.dinotooth.SettingFragment"
-    android:id="@+id/container_setting">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/container_setting"
+    android:background="#ffffff">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="섹션4"
-        android:id="@+id/textView4"
-        android:layout_gravity="center" />
+        android:id="@+id/layout_ar"
+        android:padding="10dp">
 
-</FrameLayout>
+        <Switch
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="알림 켜짐 / 꺼짐"
+            android:id="@+id/switch_setting"
+            android:textSize="15sp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="치과 정기 검진 및 검진 권유"
+            android:textColor="@color/bar_gray"
+            android:layout_below="@id/switch_setting"
+            android:textSize="12sp" />
+
+
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="18dp"
+        android:layout_marginTop="3dp"
+        android:src="@mipmap/ic_line" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="마일리지 설정"
+            android:id="@+id/txt_setting_miles"
+            android:textSize="15sp"
+            android:textColor="#000000"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true" />
+
+    </RelativeLayout>
+
+    <ImageView
+    android:layout_width="match_parent"
+    android:layout_height="18dp"
+    android:layout_marginTop="3dp"
+    android:src="@mipmap/ic_line" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="어플리케이션 테마 설정"
+            android:id="@+id/txt_setting_color"
+            android:textSize="15sp"
+            android:textColor="#000000"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true" />
+
+    </RelativeLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="18dp"
+        android:layout_marginTop="3dp"
+        android:src="@mipmap/ic_line" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="계정 설정"
+            android:id="@+id/txt_setting_account"
+            android:textSize="15sp"
+            android:textColor="#000000"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true" />
+
+    </RelativeLayout>
+</LinearLayout>
