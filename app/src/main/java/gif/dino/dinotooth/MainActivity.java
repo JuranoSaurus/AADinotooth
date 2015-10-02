@@ -58,6 +58,8 @@ public class MainActivity extends FragmentActivity
 
         // set container
         flContainer = (FrameLayout)findViewById(R.id.container);
+
+        getActionBar().setDisplayShowHomeEnabled(false);
     }
 
     @Override
