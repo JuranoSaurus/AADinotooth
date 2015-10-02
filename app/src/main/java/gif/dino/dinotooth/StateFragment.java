@@ -1,12 +1,16 @@
 package gif.dino.dinotooth;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.Fragment;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.DatePicker;
 
 
 /**
@@ -28,6 +32,15 @@ public class StateFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    View addMessage;
+
+    //Dialog를 표시하기 위한 Button
+    Button btnDatePicker;
+
+    //상태유지를 위한 전역변수
+    int YEAR = 0, MONTH = 0, DAY = 0;
+
 
     /**
      * Use this factory method to create a new instance of
@@ -58,13 +71,32 @@ public class StateFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_state, container, false);
+
+        addMessage = inflater.inflate(R.layout.fragment_state, container, false);
+
+        btnDatePicker = (Button) addMessage.findViewById(R.id.btnDate);
+        btnDatePicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDatePickerDialog();
+            }
+        });
+
+        //Dialog에 출력하기 위한 현재 시스템 날짜를 구하여 전역변수에 미리 셋팅한다.
+        int[] date = DateTimeHelper.getInstance().getDate();
+        YEAR = date[0];
+        MONTH = date[1];
+        DAY = date[2];
+
+        return addMessage;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -91,6 +123,7 @@ public class StateFragment extends Fragment {
         mListener = null;
     }
 
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -106,4 +139,49 @@ public class StateFragment extends Fragment {
         public void onFragmentInteraction(Uri uri);
     }
 
+    /**날짜 선택 팝업을 표시한다.*/
+    public void showDatePickerDialog() {
+        //원복처리에 사용될 임시값 - 원본 데이터를 백업한다.
+        final int temp_yy = YEAR;
+        final int temp_mm = MONTH;
+        final int temp_dd = DAY;
+
+        //Dialog 객체의 생성 --> "Context, 이벤트 핸들러, 년, 월, 일" 을 파라미터로 전달한다.
+        DatePickerDialog dialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+            //Dialog에서 사용자가 날짜를 선택하고 "확인" 버튼을 누르면 동작하는 이벤트
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                //사용자의 선택값을 전역변수에 설정한다.
+                YEAR = year;
+                MONTH = monthOfYear + 1;
+                DAY = dayOfMonth;
+                //버튼에 날짜출력
+                btnDatePicker.setText(YEAR + "년 " + MONTH + "월 " + DAY + "일");
+            }
+        }, YEAR, MONTH - 1, DAY);
+
+        /**사용자가 Back키를 눌렀을 때, 동작하는 이벤트 정의*/
+        /* --> 구글 표준 API에서는 다이얼로그에 취소버튼이 포함되어 있지 않다.
+         *     하지만, 일부 제조사들은 "취소" 버튼을 임의로 넣고 있기 때문에
+         *     코드로 "취소" 버튼을 정의하는 것은 적합하지 않다.
+         *     그러므로, 창에서 취소처리가 발생하는 경우에 대한 이벤트를 정의한다.
+         * --> import android.content.DialogInterface.OnCancelListener;
+         */
+        dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface arg0) {
+                //백업해 두었던 값을 원복시킨다.
+                YEAR = temp_yy;
+                MONTH = temp_mm;
+                DAY = temp_dd;
+            }
+        });
+
+        //제목 + 아이콘
+        dialog.setTitle("날짜 선택");
+        dialog.setIcon(R.mipmap.ic_launcher);
+
+        //Dialog의 화면 표시
+        dialog.show();
+    }
 }
