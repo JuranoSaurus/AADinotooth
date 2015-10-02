@@ -22,7 +22,6 @@
             android:id="@+id/txtDate"
             android:layout_margin="5dp"
             android:textSize="20sp"
-
             android:layout_centerHorizontal="true" />
 
         <Button
@@ -41,7 +40,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:background="#ffffff"
         android:layout_margin="10dp"
@@ -65,14 +64,193 @@
             android:id="@+id/img_gray_line"
             android:layout_below="@+id/txt_time_appraisal"
             android:src="@mipmap/ic_line" />
+
+        <!-- morning   >>>  !-->
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/layout_morning_total"
+            android:layout_below="@+id/img_gray_line"
+            android:paddingRight="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="아침"
+                android:id="@+id/txt_morning"
+                android:layout_margin="15dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:text="3분"
+                android:id="@+id/txt_morning_time"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="15dp"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:id="@+id/img_morning_thumb"
+                android:layout_marginTop="15dp"
+                android:layout_toLeftOf="@+id/txt_morning_time"
+                android:src="@mipmap/icon_thumb" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:weightSum="200"
+                android:id="@+id/layout_morning"
+                android:layout_marginTop="15dp"
+                android:layout_toRightOf="@+id/txt_morning"
+                android:layout_toLeftOf="@+id/img_morning_thumb">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="100"
+                    android:id="@+id/layout_morning_left"
+                    android:background="@color/point_red"/>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/layout_morning_right"
+                    android:layout_weight="100"
+                    android:background="@color/main_mint"/>
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <!-- morning   <<<  !-->
+
+        <!-- afternoon   >>>  !-->
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/layout_afternoon_total"
+            android:layout_below="@+id/layout_morning_total"
+            android:paddingRight="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="점심"
+                android:id="@+id/txt_afternoon"
+                android:layout_margin="15dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:text="3분"
+                android:id="@+id/txt_afternoon_time"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="15dp"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:id="@+id/img_afternoon_thumb"
+                android:layout_marginTop="15dp"
+                android:layout_toLeftOf="@+id/txt_afternoon_time"
+                android:src="@mipmap/icon_thumb" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:weightSum="200"
+                android:id="@+id/layout_afternoon"
+                android:layout_marginTop="15dp"
+                android:layout_toRightOf="@+id/txt_afternoon"
+                android:layout_toLeftOf="@+id/img_afternoon_thumb">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="100"
+                    android:id="@+id/layout_afternoon_left"
+                    android:background="@color/point_red"/>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/layout_afternoon_right"
+                    android:layout_weight="100"
+                    android:background="@color/main_mint"/>
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <!-- afternoon   <<<  !-->
+
+        <!-- dinner   >>>  !-->
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/layout_dinner_total"
+            android:layout_below="@+id/layout_afternoon_total"
+            android:paddingRight="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="저녁"
+                android:id="@+id/txt_dinner"
+                android:layout_margin="15dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:text="3분"
+                android:id="@+id/txt_dinner_time"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="15dp"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:id="@+id/img_dinner_thumb"
+                android:layout_marginTop="15dp"
+                android:layout_toLeftOf="@+id/txt_dinner_time"
+                android:src="@mipmap/icon_thumb" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:weightSum="200"
+                android:id="@+id/layout_dinner"
+                android:layout_marginTop="15dp"
+                android:layout_toRightOf="@+id/txt_dinner"
+                android:layout_toLeftOf="@+id/img_dinner_thumb">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="100"
+                    android:id="@+id/layout_dinner_left"
+                    android:background="@color/point_red"/>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/layout_dinner_right"
+                    android:layout_weight="100"
+                    android:background="@color/main_mint"/>
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <!-- dinner   <<<  !-->
+
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:background="#ffffff"
+        android:layout_margin="10dp"
         android:padding="15dp">
 
+
     </RelativeLayout>
+
+
 </LinearLayout>

@@ -176,6 +176,7 @@ public class StateFragment extends Fragment {
                 DAY = temp_dd;
             }
         });
+//
 
         //Dialog의 화면 표시
         dialog.show();
