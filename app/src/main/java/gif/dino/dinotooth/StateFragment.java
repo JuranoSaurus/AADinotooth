@@ -177,10 +177,6 @@ public class StateFragment extends Fragment {
             }
         });
 
-        //제목 + 아이콘
-        dialog.setTitle("날짜 선택");
-        dialog.setIcon(R.mipmap.ic_launcher);
-
         //Dialog의 화면 표시
         dialog.show();
     }
