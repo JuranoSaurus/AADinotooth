@@ -2,15 +2,22 @@ package gif.dino.dinotooth;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.Collections;
 
 
 /**
@@ -33,8 +40,8 @@ public class EduFragment extends Fragment {
 
     //list view
     View addMessage;
-    private ListView m_ListView;
-    private ArrayAdapter<String> m_Adapter;
+    private ListView mListView = null;
+    private ListViewAdapter mAdapter = null;
 
     private OnFragmentInteractionListener mListener;
 
@@ -68,6 +75,12 @@ public class EduFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
+    private class ViewHolder {
+        public ImageView mIcon;
+        public TextView mText;
+
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -75,29 +88,153 @@ public class EduFragment extends Fragment {
         // Inflate the layout for this fragment
 
         addMessage = inflater.inflate(R.layout.fragment_edu, container, false);
-        // Android에서 제공하는 string 문자열 하나를 출력 가능한 layout으로 어댑터 생성
-        m_Adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1);
 
-        // Xml에서 추가한 ListView 연결
-        m_ListView = (ListView) addMessage.findViewById(R.id.listview_edu);
+        mListView = (ListView) addMessage.findViewById(R.id.listview_edu);
 
-        // ListView에 어댑터 연결
-        m_ListView.setAdapter(m_Adapter);
+        mAdapter = new ListViewAdapter(getActivity());
+        mListView.setAdapter(mAdapter);
 
-        // ListView 아이템 터치 시 이벤트 추가
-        m_ListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+        mAdapter.addItem(getResources().getDrawable(R.mipmap.img_edu_1), "이를 닦아요");
+        mAdapter.addItem(getResources().getDrawable(R.mipmap.img_edu_2), "뽀로로 어린이 양치 캠페인");
+        mAdapter.addItem(getResources().getDrawable(R.mipmap.img_edu_3), "2080 키즈 치카치카 가이드");
+        mAdapter.addItem(getResources().getDrawable(R.mipmap.img_edu_4), "2080 로보카폴리 치카치카 가이드");
+        mAdapter.addItem(getResources().getDrawable(R.mipmap.img_edu_5), "비카 오큐걸의 올바른 칫솔질");
+        mAdapter.addItem(getResources().getDrawable(R.mipmap.img_edu_6), "코코몽과 양치하기");
+        mAdapter.addItem(getResources().getDrawable(R.mipmap.img_edu_7), "아기공룡둘리 이닦기노래");
+        mAdapter.addItem(getResources().getDrawable(R.mipmap.img_edu_8), "디보와 함께하는 이닦기 노래");
+        mAdapter.addItem(getResources().getDrawable(R.mipmap.img_edu_9), "아이 챌린지 치카치카");
+
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getActivity().getApplicationContext(), m_Adapter.getItem(position), Toast.LENGTH_SHORT).show();
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                ListData mData = mAdapter.mListData.get(position);
+                Intent intent;
+                switch (position){
+                    case 0:
+                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=edBJm6NdIiU"));
+                        startActivity(intent);
+                        break;
+                    case 1:
+                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=3blrxTRsprk"));
+                        startActivity(intent);
+                        break;
+                    case 2:
+                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=E2bDNc8jPlc"));
+                        startActivity(intent);
+                        break;
+                    case 3:
+                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=KDmwfT4Qxe8"));
+                        startActivity(intent);
+                        break;
+                    case 4:
+                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=Sd-dV8i2SiE\n"));
+                        startActivity(intent);
+                        break;
+                    case 5:
+                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=8dJNFelsbb8"));
+                        startActivity(intent);
+                        break;
+                    case 6:
+                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=bLe_Cz0wZOM"));
+                        startActivity(intent);
+                        break;
+                    case 7:
+                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=IDa4STocM8M"));
+                        startActivity(intent);
+                        break;
+                    case 8:
+                        intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=U-oUaXJU2P0&index=2&list=PLfaheItvoU6NPQ75-gjteIm7G2loqglJz"));
+                        startActivity(intent);
+                        break;
+
+                }
             }
         });
 
-        // ListView에 아이템 추가
-        m_Adapter.add("이를 닦아요");
-        m_Adapter.add("뽀로로 어린이 양치 캠페인");
-
         return addMessage;
     }
+
+    private class ListViewAdapter extends BaseAdapter {
+        private Context mContext = null;
+        private ArrayList<ListData> mListData = new ArrayList<ListData>();
+
+        public ListViewAdapter(Context mContext) {
+            super();
+            this.mContext = mContext;
+        }
+
+        @Override
+        public int getCount() {
+            return mListData.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return mListData.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            ViewHolder holder;
+            if (convertView == null) {
+                holder = new ViewHolder();
+
+                LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                convertView = inflater.inflate(R.layout.edu_listview, null);
+
+                holder.mIcon = (ImageView) convertView.findViewById(R.id.mImage);
+                holder.mText = (TextView) convertView.findViewById(R.id.mText);
+
+
+                convertView.setTag(holder);
+            }else{
+                holder = (ViewHolder) convertView.getTag();
+            }
+
+            ListData mData = mListData.get(position);
+
+            if (mData.mIcon != null) {
+                holder.mIcon.setVisibility(View.VISIBLE);
+                holder.mIcon.setImageDrawable(mData.mIcon);
+            }else{
+                holder.mIcon.setVisibility(View.GONE);
+            }
+
+            holder.mText.setText(mData.mTitle);
+
+
+            return convertView;
+        }
+
+        public void addItem(Drawable icon, String mTitle){
+            ListData addInfo = null;
+            addInfo = new ListData();
+            addInfo.mIcon = icon;
+            addInfo.mTitle = mTitle;
+
+            mListData.add(addInfo);
+        }
+
+        public void remove(int position){
+            mListData.remove(position);
+            dataChange();
+        }
+
+        public void sort(){
+            Collections.sort(mListData, ListData.ALPHA_COMPARATOR);
+            dataChange();
+        }
+
+        public void dataChange(){
+            mAdapter.notifyDataSetChanged();
+        }
+    }
+
 
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -138,5 +275,8 @@ public class EduFragment extends Fragment {
         // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
     }
+
+
+
 
 }
