@@ -5,14 +5,16 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
-public class MainActivity extends Activity
+public class MainActivity extends FragmentActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
     /**
@@ -28,6 +30,12 @@ public class MainActivity extends Activity
     //back press
     private BackPressCloseHandler backPressCloseHandler;
 
+    // main layout
+    private FrameLayout flContainer;
+
+    public final String TAG = "Jool";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +50,11 @@ public class MainActivity extends Activity
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
+        // set back press
         backPressCloseHandler = new BackPressCloseHandler(this);
+
+        // set container
+        flContainer = (FrameLayout)findViewById(R.id.container);
     }
 
     @Override
@@ -50,9 +62,11 @@ public class MainActivity extends Activity
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
+                .replace(R.id.container, PlaceholderFragment.newInstance(position))
                 .addToBackStack("flagBack")
                 .commit();
+
+
     }
 
     public void onSectionAttached(int number) {
@@ -112,6 +126,7 @@ public class MainActivity extends Activity
          * fragment.
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
+        private static int arg_section_num = -1;
 
         /**
          * Returns a new instance of this fragment for the given section
@@ -122,6 +137,7 @@ public class MainActivity extends Activity
             Bundle args = new Bundle();
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
             fragment.setArguments(args);
+            arg_section_num = sectionNumber;
             return fragment;
         }
 
@@ -131,7 +147,21 @@ public class MainActivity extends Activity
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+            View rootView = rootView = inflater.inflate(R.layout.section_state, container, false);
+            switch (arg_section_num){
+                case 0:
+                    rootView = inflater.inflate(R.layout.section_state, container, false);
+                    break;
+                case 1:
+                    rootView = inflater.inflate(R.layout.section_edu, container, false);
+                    break;
+                case 2:
+                    rootView = inflater.inflate(R.layout.section_miles, container, false);
+                    break;
+                case 3:
+                    rootView = inflater.inflate(R.layout.section_setting, container, false);
+                    break;
+            }
             return rootView;
         }
 
@@ -141,18 +171,24 @@ public class MainActivity extends Activity
             ((MainActivity) activity).onSectionAttached(
                     getArguments().getInt(ARG_SECTION_NUMBER));
         }
+
+
+
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         // BackStack의 수를 가져온다
-        //getFragmentManager().getBackStackEntryCount()
+        getFragmentManager().getBackStackEntryCount();
 
         //전단계의 Fragment
         getFragmentManager().popBackStack();
         backPressCloseHandler.onBackPressed();
     }
+
+
+
 
 
 }
