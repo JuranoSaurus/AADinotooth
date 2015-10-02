@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
@@ -15,7 +16,9 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 public class MainActivity extends FragmentActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks
+        , StateFragment.OnFragmentInteractionListener, EduFragment.OnFragmentInteractionListener
+        , MilesFragment.OnFragmentInteractionListener, SettingFragment.OnFragmentInteractionListener{
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -65,6 +68,35 @@ public class MainActivity extends FragmentActivity
                 .replace(R.id.container, PlaceholderFragment.newInstance(position+1))
                 .addToBackStack("flagBack")
                 .commit();
+        switch (position+1) {
+            case 1:
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container,new StateFragment())
+                        .addToBackStack("flagBack")
+                        .commit();
+                break;
+            case 2:
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container,new EduFragment())
+                        .addToBackStack("flagBack")
+                        .commit();
+                break;
+
+            case 3:
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container,new MilesFragment())
+                        .addToBackStack("flagBack")
+                        .commit();
+                break;
+
+            case 4:
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container,new SettingFragment())
+                        .addToBackStack("flagBack")
+                        .commit();
+                break;
+
+        }
 
 
     }
@@ -117,6 +149,11 @@ public class MainActivity extends FragmentActivity
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
+
     /**
      * A placeholder fragment containing a simple view.
      */
@@ -126,7 +163,7 @@ public class MainActivity extends FragmentActivity
          * fragment.
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
-        private static int arg_section_num = -1;
+//        private static int arg_section_num = -1;
 
         /**
          * Returns a new instance of this fragment for the given section
@@ -137,7 +174,6 @@ public class MainActivity extends FragmentActivity
             Bundle args = new Bundle();
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
             fragment.setArguments(args);
-            arg_section_num = sectionNumber;
             return fragment;
         }
 
@@ -147,24 +183,8 @@ public class MainActivity extends FragmentActivity
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-            View rootView = rootView = inflater.inflate(R.layout.section_state, container, false);
-            switch (arg_section_num){
-                case 0:
-                    rootView = inflater.inflate(R.layout.section_state, container, false);
-                    break;
-                case 1:
-                    rootView = inflater.inflate(R.layout.section_state, container, false);
-                    break;
-                case 2:
-                    rootView = inflater.inflate(R.layout.section_edu, container, false);
-                    break;
-                case 3:
-                    rootView = inflater.inflate(R.layout.section_miles, container, false);
-                    break;
-                case 4:
-                    rootView = inflater.inflate(R.layout.section_setting, container, false);
-                    break;
-            }
+            View rootView = rootView = inflater.inflate(R.layout.fragment_state, container, false);
+
             return rootView;
         }
 
@@ -189,6 +209,7 @@ public class MainActivity extends FragmentActivity
         getFragmentManager().popBackStack();
         backPressCloseHandler.onBackPressed();
     }
+
 
 
 
