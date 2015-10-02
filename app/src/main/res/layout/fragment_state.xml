@@ -308,6 +308,32 @@
 
         </RelativeLayout>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="종합 평가"
+            android:id="@+id/txt_total"
+            android:textSize="15sp"
+            android:layout_marginTop="30dp"
+            android:layout_below="@+id/layout_avg_time_total"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:layout_marginTop="3dp"
+            android:id="@+id/img_gray_line_3"
+            android:layout_below="@+id/txt_total"
+            android:src="@mipmap/ic_line" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/img_total"
+            android:layout_below="@+id/img_gray_line_3"
+            android:src="@mipmap/img_msg_1" />
+
 
     </RelativeLayout>
 
