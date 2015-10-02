@@ -62,7 +62,7 @@ public class MainActivity extends FragmentActivity
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position))
+                .replace(R.id.container, PlaceholderFragment.newInstance(position+1))
                 .addToBackStack("flagBack")
                 .commit();
 
@@ -153,12 +153,15 @@ public class MainActivity extends FragmentActivity
                     rootView = inflater.inflate(R.layout.section_state, container, false);
                     break;
                 case 1:
-                    rootView = inflater.inflate(R.layout.section_edu, container, false);
+                    rootView = inflater.inflate(R.layout.section_state, container, false);
                     break;
                 case 2:
-                    rootView = inflater.inflate(R.layout.section_miles, container, false);
+                    rootView = inflater.inflate(R.layout.section_edu, container, false);
                     break;
                 case 3:
+                    rootView = inflater.inflate(R.layout.section_miles, container, false);
+                    break;
+                case 4:
                     rootView = inflater.inflate(R.layout.section_setting, container, false);
                     break;
             }

@@ -1,6 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:id="@+id/container_miles">
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/container_miles">
 
-</FrameLayout>
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="180dp"
+            android:id="@+id/img_brush_gray"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:src="@mipmap/ic_brush_gray" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="아이의 양치 마일리지는"
+        android:textSize="20sp"
+        android:layout_below="@+id/img_brush_gray"
+        android:id="@+id/txt_miles_up"
+        android:layout_margin="5dp"
+        android:layout_centerHorizontal="true"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txt_miles"
+        android:textSize="40sp"
+        android:textColor="@color/point_red"
+        android:text="0"
+        android:layout_below="@+id/txt_miles_up"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txt_miles_right"
+        android:textSize="40sp"
+        android:textColor="@color/point_red"
+        android:text="P"
+        android:layout_below="@+id/txt_miles_up"
+        android:layout_toRightOf="@+id/txt_miles"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txt_miles_down"
+        android:layout_margin="5dp"
+        android:textSize="20sp"
+        android:text="입니다."
+        android:layout_below="@+id/txt_miles"
+        android:layout_centerHorizontal="true" />
+
+
+
+</RelativeLayout>
