@@ -8,7 +8,7 @@ public class DataConstants {
     public static int DATA_MILES = 0;
 
     public static String IP_ADDRESS = "192.168.42.1";
-    public static int PORT_NUM = 9001;
+    public static int PORT_NUM = 9003;
 
     public static int YEAR = 0;
     public static int MONTH = 0;

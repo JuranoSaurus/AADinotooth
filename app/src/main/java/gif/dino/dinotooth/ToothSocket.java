@@ -29,7 +29,6 @@ public class ToothSocket extends Thread{
     private int     mPort = 8080;
     private boolean mConnected = false;
     private Handler mHandler = null;
-
     DataOutputStream dos;
     DataInputStream dis ;
     byte[] in;
@@ -96,9 +95,16 @@ public class ToothSocket extends Thread{
         String aLine = null;
 
         while( ! Thread.interrupted() ){ try {
+
             dis.read(in, 0, in.length);
             String receive = new String(in, 0, in.length);
-            aLine = buffRecv.readLine();
+            String mor = receive.substring(0, 2);
+            DataConstants.MORNING_TIME = Integer.getInteger(mor);
+
+            char grade = receive.charAt(3);
+            DataConstants.MORNING_GRADE= Character.digit(grade,10);
+
+  //          aLine = buffRecv.readLine();
             if(receive != null) makeMessage(MessageType.SIMSOCK_DATA, receive);
 //            if(aLine != null) makeMessage(MessageType.SIMSOCK_DATA, aLine);
             else break;
@@ -139,7 +145,21 @@ public class ToothSocket extends Thread{
             dos.flush();
         }catch (IOException e){}
 
+    }
 
+    public void sendInteger(int value){
+        if(value > 9) return;
+        if(value < 0) return;
+
+        byte[] out = new byte[1];
+        out[0] = (byte) value;
+
+        try{
+            dos.write(out);
+            dos.flush();
+
+
+        }catch (IOException e){}
 
     }
 
