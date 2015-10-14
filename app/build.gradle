@@ -1,4 +1,4 @@
-def AAVersion = "3.3.2" // change this to your desired version, for example the latest stable: 3.3.2
+def AAVersion = "4.0-SNAPSHOT" // change this to your desired version, for example the latest stable: 3.3.2
 
 apply plugin: "com.android.application"
 apply plugin: "com.neenbedankt.android-apt"
