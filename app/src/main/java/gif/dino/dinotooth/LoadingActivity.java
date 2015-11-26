@@ -6,9 +6,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.support.annotation.LayoutRes;
 import android.util.Log;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import org.androidannotations.annotations.App;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Fullscreen;
@@ -18,6 +21,12 @@ import java.io.DataOutputStream;
 @Fullscreen
 @EActivity(R.layout.activity_loading)
 public class LoadingActivity extends Activity {
+
+    @App
+    ApplicationClass myApplication;
+
+    @LayoutRes
+    RelativeLayout layoutLoading;
 
     static ToothSocket socket = null;
     DataOutputStream dos;

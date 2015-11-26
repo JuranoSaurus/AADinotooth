@@ -24,3 +24,4 @@ dependencies {
     compile "org.androidannotations:androidannotations-api:$AAVersion"
     compile 'com.android.support:support-v4:23.0.1'
 }
+
